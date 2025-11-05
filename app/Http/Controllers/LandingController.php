@@ -11,8 +11,25 @@ class LandingController extends Controller
      */
     public function index()
     {
+        return view('landing.index');
+    }
+
+    /**
+     * Display the topics detail page.
+     */
+    public function topicsDetail()
+    {
+        return view('landing.topics-detail');
+    }
+
+    /**
+     * Display the main page with all content combined.
+     */
+    public function main()
+    {
         return view('landing.main');
     }
+    
 
     /**
      * Show the form for creating a new resource.

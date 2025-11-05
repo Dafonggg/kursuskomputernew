@@ -188,6 +188,9 @@ p {
 /* Icon circles - use accent */
 .services .service-item .icon {
   background-color: var(--accent);
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%) !important;
 }
 
 /* Event/Course cards */

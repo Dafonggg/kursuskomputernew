@@ -2,8 +2,24 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\detailController;
+use App\Http\Controllers\listingController;
+use App\Http\Controllers\contactController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\admin\adminController;
+use App\Http\Controllers\admin\pesertaController;
+use App\Http\Controllers\admin\jadwalController;
+use App\Http\Controllers\admin\kursusController;
+use App\Http\Controllers\admin\materinController;
+use App\Http\Controllers\admin\katalogController;
+use App\Http\Controllers\admin\laporanController;
+use App\Http\Controllers\admin\analisisController;
+use App\Http\Controllers\admin\chatController;
+use App\Http\Controllers\sistem\SaccountController;
+use App\Http\Controllers\sistem\SconnectionsController;
+use App\Http\Controllers\sistem\SnotificationController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +31,32 @@ use App\Http\Controllers\RegisterController;
 |
 */
 
-route::get('/', [LandingController::class, 'index'])->name('index')->name('home');
-route::get('/login', [LoginController::class, 'login'])->name('login');
-route::get('/register', [RegisterController::class, 'register'])->name('register');
+// Landing Page Routes
+Route::get('/', [LandingController::class, 'index'])->name('home');
+Route::get('/topics-detail', [detailController::class, 'detail'])->name('topics-detail');
+Route::get('/topics-listing', [listingController::class, 'listing'])->name('topics-listing');
+Route::get('/contact', [contactController::class, 'contact'])->name('contact');
+Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::get('/register', [RegisterController::class, 'register'])->name('register');
+
+// Auth Routes
+Route::post('/logout', function () {
+    // Logout logic akan ditambahkan saat auth system siap
+    return redirect()->route('login');
+})->name('logout');
+
+// Dashboard Routes
+Route::prefix('dashboard')->name('dashboard.')->group(function () {
+    Route::get('/admin-dashboard', [adminController::class, 'indexAdmin'])->name('admin-dashboard');
+    Route::get('/peserta-kursus', [pesertaController::class, 'pesertaKursus'])->name('peserta-kursus');
+    Route::get('/jadwal-kursus', [jadwalController::class, 'jadwalKursus'])->name('jadwal-kursus');
+    Route::get('/kursus', [kursusController::class, 'kursus'])->name('kursus');
+    Route::get('/materi-kursus', [materinController::class, 'materiKursus'])->name('materi-kursus');
+    Route::get('/katalog-produk', [katalogController::class, 'katalogProduk'])->name('katalog-produk');
+    Route::get('/laporan-keuangan', [laporanController::class, 'laporanKeuangan'])->name('laporan-keuangan');
+    Route::get('/analisis-peserta', [analisisController::class, 'analisisPeserta'])->name('analisis-peserta');
+    Route::get('/chat', [chatController::class, 'chat'])->name('chat');
+    Route::get('/account-sistem', [SaccountController::class, 'accountSistem'])->name('account-sistem');
+    Route::get('/connections-sistem', [SconnectionsController::class, 'connectionsSistem'])->name('connections-sistem');
+    Route::get('/notifications-sistem', [SnotificationController::class, 'notificationSistem'])->name('notifications-sistem');
+});
