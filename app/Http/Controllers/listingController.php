@@ -11,7 +11,7 @@ class listingController extends Controller
      */
     public function listing()
     {
-        return view('landing.topics-listing');
+        return view('landing.daftar-kursus');
     }
 
     /**

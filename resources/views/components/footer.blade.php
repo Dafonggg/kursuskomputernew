@@ -4,8 +4,8 @@
 
             <div class="col-lg-3 col-12 mb-4 pb-2">
                 <a class="navbar-brand mb-2" href="{{ url('/') }}">
-                    <i class="bi-back"></i>
-                    <span>Kursus Ryan Komputer</span>
+                    <img src="{{ asset('images/logokrk.png') }}" alt="Ryan Computer" style="height: 40px; margin-right: 10px;">
+                    <span>Kursus Ryan</span>
                 </a>
             </div>
 

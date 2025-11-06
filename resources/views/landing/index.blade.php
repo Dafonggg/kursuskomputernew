@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Topic Listing Bootstrap 5 Template')
+@section('title', 'Kursus Ryan Komputer')
 
 @section('content')
 <section class="hero-section d-flex justify-content-center align-items-center" id="section_1">
@@ -8,9 +8,9 @@
         <div class="row">
 
             <div class="col-lg-8 col-12 mx-auto">
-                <h1 class="text-white text-center">Discover. Learn. Enjoy</h1>
+                <h1 class="text-white text-center">Selamat datang di Kursus Ryan Komputer</h1>
 
-                <h6 class="text-center">platform for creatives around the world</h6>
+                <h6 class="text-center">Kursus Ryan Komputer adalah platform kursus komputer yang menyediakan berbagai macam kursus untuk para pelajar dan mahasiswa</h6>
 
                 <form method="get" class="custom-form mt-4 pt-2 mb-lg-0 mb-5" role="search">
                     <div class="input-group input-group-lg">
@@ -36,7 +36,7 @@
 
             <div class="col-lg-4 col-12 mb-4 mb-lg-0">
                 <div class="custom-block bg-white shadow-lg">
-                    <a href="{{ url('/topics-detail') }}">
+                    <a href="{{ url('/detail-kursus') }}">
                         <div class="d-flex">
                             <div>
                                 <h5 class="mb-2">Web Design</h5>
@@ -63,7 +63,7 @@
 
                                 <p class="text-white">Topic Listing Template includes homepage, listing page, detail page, and contact page. You can feel free to edit and adapt for your CMS requirements.</p>
 
-                                <a href="{{ route('topics-detail') }}" class="btn custom-btn mt-2 mt-lg-3">Learn More</a>
+                                <a href="{{ route('detail-kursus') }}" class="btn custom-btn mt-2 mt-lg-3">Learn More</a>
                             </div>
 
                             <span class="badge bg-finance rounded-pill ms-auto">25</span>
@@ -104,7 +104,7 @@
         <div class="row">
 
             <div class="col-12 text-center">
-                <h2 class="mb-4">Browse Topics</h1>
+                <h2 class="mb-4">Kursus yang tersedia</h1>
             </div>
 
         </div>
@@ -145,7 +145,7 @@
                         <div class="row">
                             <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
                                 <div class="custom-block bg-white shadow-lg">
-                                    <a href="{{ url('/topics-detail') }}">
+                                    <a href="{{ url('/detail-kursus') }}">
                                         <div class="d-flex">
                                             <div>
                                                 <h5 class="mb-2">Web Design</h5>
@@ -163,7 +163,7 @@
 
                             <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
                                 <div class="custom-block bg-white shadow-lg">
-                                    <a href="{{ url('/topics-detail') }}">
+                                    <a href="{{ url('/detail-kursus') }}">
                                         <div class="d-flex">
                                             <div>
                                                 <h5 class="mb-2">Graphic</h5>
@@ -181,7 +181,7 @@
 
                             <div class="col-lg-4 col-md-6 col-12">
                                 <div class="custom-block bg-white shadow-lg">
-                                    <a href="{{ url('/topics-detail') }}">
+                                    <a href="{{ url('/detail-kursus') }}">
                                         <div class="d-flex">
                                             <div>
                                                 <h5 class="mb-2">Logo Design</h5>
@@ -203,7 +203,7 @@
                         <div class="row">
                             <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-3">
                                     <div class="custom-block bg-white shadow-lg">
-                                        <a href="{{ url('/topics-detail') }}">
+                                        <a href="{{ url('/detail-kursus') }}">
                                             <div class="d-flex">
                                                 <div>
                                                     <h5 class="mb-2">Advertising</h5>
@@ -221,7 +221,7 @@
 
                                 <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-3">
                                     <div class="custom-block bg-white shadow-lg">
-                                        <a href="{{ url('/topics-detail') }}">
+                                        <a href="{{ url('/detail-kursus') }}">
                                             <div class="d-flex">
                                                 <div>
                                                     <h5 class="mb-2">Video Content</h5>
@@ -239,7 +239,7 @@
 
                                 <div class="col-lg-4 col-md-6 col-12">
                                     <div class="custom-block bg-white shadow-lg">
-                                        <a href="{{ url('/topics-detail') }}">
+                                        <a href="{{ url('/detail-kursus') }}">
                                             <div class="d-flex">
                                                 <div>
                                                     <h5 class="mb-2">Viral Tweet</h5>
@@ -260,7 +260,7 @@
                     <div class="tab-pane fade" id="finance-tab-pane" role="tabpanel" aria-labelledby="finance-tab" tabindex="0">   <div class="row">
                             <div class="col-lg-6 col-md-6 col-12 mb-4 mb-lg-0">
                                 <div class="custom-block bg-white shadow-lg">
-                                    <a href="{{ url('/topics-detail') }}">
+                                    <a href="{{ url('/detail-kursus') }}">
                                         <div class="d-flex">
                                             <div>
                                                 <h5 class="mb-2">Investment</h5>
@@ -287,7 +287,7 @@
 
                                                 <p class="text-white">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sint animi necessitatibus aperiam repudiandae nam omnis</p>
 
-                                                <a href="{{ route('topics-detail') }}" class="btn custom-btn mt-2 mt-lg-3">Learn More</a>
+                                                <a href="{{ route('detail-kursus') }}" class="btn custom-btn mt-2 mt-lg-3">Learn More</a>
                                             </div>
 
                                             <span class="badge bg-finance rounded-pill ms-auto">25</span>
@@ -324,7 +324,7 @@
                         <div class="row">
                             <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-3">
                                 <div class="custom-block bg-white shadow-lg">
-                                    <a href="{{ url('/topics-detail') }}">
+                                    <a href="{{ url('/detail-kursus') }}">
                                         <div class="d-flex">
                                             <div>
                                                 <h5 class="mb-2">Composing Song</h5>
@@ -342,7 +342,7 @@
 
                             <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-3">
                                 <div class="custom-block bg-white shadow-lg">
-                                    <a href="{{ url('/topics-detail') }}">
+                                    <a href="{{ url('/detail-kursus') }}">
                                         <div class="d-flex">
                                             <div>
                                                 <h5 class="mb-2">Online Music</h5>
@@ -360,7 +360,7 @@
 
                             <div class="col-lg-4 col-md-6 col-12">
                                 <div class="custom-block bg-white shadow-lg">
-                                    <a href="{{ url('/topics-detail') }}">
+                                    <a href="{{ url('/detail-kursus') }}">
                                         <div class="d-flex">
                                             <div>
                                                 <h5 class="mb-2">Podcast</h5>
@@ -382,7 +382,7 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-12 mb-4 mb-lg-3">
                                 <div class="custom-block bg-white shadow-lg">
-                                    <a href="{{ url('/topics-detail') }}">
+                                    <a href="{{ url('/detail-kursus') }}">
                                         <div class="d-flex">
                                             <div>
                                                 <h5 class="mb-2">Graduation</h5>
@@ -400,7 +400,7 @@
 
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="custom-block bg-white shadow-lg">
-                                    <a href="{{ url('/topics-detail') }}">
+                                    <a href="{{ url('/detail-kursus') }}">
                                         <div class="d-flex">
                                             <div>
                                                 <h5 class="mb-2">Educator</h5>
@@ -442,9 +442,9 @@
                         </div>
 
                         <li>
-                            <h4 class="text-white mb-3">Search your favourite topic</h4>
+                            <h4 class="text-white mb-3">Course Your Course</h4>
 
-                            <p class="text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis, cumque magnam? Sequi, cupiditate quibusdam alias illum sed esse ad dignissimos libero sunt, quisquam numquam aliquam? Voluptas, accusamus omnis?</p>
+                            <p class="text-white">Pilih kursus komputer yang kamu mau — dari dasar hingga tingkat lanjut. Ada pilihan desain grafis, pemrograman, Office, dan banyak lagi!</p>
 
                             <div class="icon-holder">
                               <i class="bi-search"></i>
@@ -452,9 +452,9 @@
                         </li>
                         
                         <li>
-                            <h4 class="text-white mb-3">Bookmark &amp; Keep it for yourself</h4>
+                            <h4 class="text-white mb-3">Learn Anywhere</h4>
 
-                            <p class="text-white">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sint animi necessitatibus aperiam repudiandae nam omnis est vel quo, nihil repellat quia velit error modi earum similique odit labore. Doloremque, repudiandae?</p>
+                            <p class="text-white">Belajar dengan cara yang paling nyaman buat kamu! Bisa online lewat platform kami atau datang langsung ke kelas offline.</p>
 
                             <div class="icon-holder">
                               <i class="bi-bookmark"></i>
@@ -462,9 +462,9 @@
                         </li>
 
                         <li>
-                            <h4 class="text-white mb-3">Read &amp; Enjoy</h4>
+                            <h4 class="text-white mb-3">Get Certified</h4>
 
-                            <p class="text-white">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi vero quisquam, rem assumenda similique voluptas distinctio, iste est hic eveniet debitis ut ducimus beatae id? Quam culpa deleniti officiis autem?</p>
+                            <p class="text-white">Setelah selesai kursus, kamu akan mendapatkan sertifikat resmi dari Kursus Ryan Komputer!</p>
 
                             <div class="icon-holder">
                               <i class="bi-book"></i>
@@ -504,13 +504,13 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingOne">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            What is Topic Listing?
+                            1. Apakah kursus ini bisa dilakukan secara online?
                             </button>
                         </h2>
 
                         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                Topic Listing is free Bootstrap 5 CSS template. <strong>You are not allowed to redistribute this template</strong> on any other template collection website without our permission. Please contact TemplateMo for more detail. Thank you.
+                                Tentu! Kamu bisa ikut kelas secara online lewat platform kami atau datang langsung ke kelas offline sesuai jadwal yang tersedia.
                             </div>
                         </div>
                     </div>
@@ -518,13 +518,13 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingTwo">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            How to find a topic?
+                            2. Apakah peserta akan mendapat sertifikat?
                         </button>
                         </h2>
 
                         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                You can search on Google with <strong>keywords</strong> such as templatemo portfolio, templatemo one-page layouts, photography, digital marketing, etc.
+                                Ya, setiap peserta yang menyelesaikan kursus akan mendapatkan sertifikat resmi sebagai bukti keahlianmu.
                             </div>
                         </div>
                     </div>
@@ -532,13 +532,41 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingThree">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Does it need to paid?
+                            3. Apakah ada biaya pendaftaran?
                         </button>
                         </h2>
 
                         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                Beberapa kursus kami gratis, namun untuk kelas tertentu ada biaya pendaftaran dan materi. Semua informasinya bisa kamu lihat di halaman detail kursus.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            4. Apakah saya perlu membawa laptop sendiri untuk kelas offline?
+                        </button>
+                        </h2>
+
+                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                Disarankan membawa laptop sendiri agar bisa langsung praktik. Tapi kalau tidak punya, kami juga menyediakan komputer di ruang kelas.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFive">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            5. Apakah ada batas usia untuk mengikuti kursus?
+                        </button>
+                        </h2>
+
+                        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                Tidak ada batasan usia — semua orang boleh belajar, baik pelajar, mahasiswa, maupun profesional yang ingin meningkatkan skill komputer!
                             </div>
                         </div>
                     </div>

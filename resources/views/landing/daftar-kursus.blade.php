@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
-@section('title', 'Topic Listing Page')
+@section('title', 'Daftar Kursus Page')
 
-@section('body-class', 'topics-listing-page')
+@section('body-class', 'daftar-kursus-page')
 
 @section('content')
 <header class="site-header d-flex flex-column justify-content-center align-items-center">
@@ -14,11 +14,11 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ url('/') }}">Homepage</a></li>
 
-                        <li class="breadcrumb-item active" aria-current="page">Topics Listing</li>
+                        <li class="breadcrumb-item active" aria-current="page">Daftar Kursus</li>
                     </ol>
                 </nav>
 
-                <h2 class="text-white">Topics Listing</h2>
+                <h2 class="text-white">Daftar Kursus</h2>
             </div>
 
         </div>
@@ -31,7 +31,7 @@
         <div class="row">
 
             <div class="col-lg-12 col-12 text-center">
-                <h3 class="mb-4">Popular Topics</h3>
+                <h3 class="mb-4">Popular Kursus</h3>
             </div>
 
             <div class="col-lg-8 col-12 mt-3 mx-auto">
@@ -43,9 +43,9 @@
                             <div>
                                 <h5 class="mb-2">Web Design</h5>
 
-                                <p class="mb-0">Topic Listing includes home, listing, detail and contact pages. Feel free to modify this template for your custom websites.</p>
+                                <p class="mb-0">Daftar Kursus includes home, listing, detail and contact pages. Feel free to modify this template for your custom websites.</p>
 
-                                <a href="{{ url('/topics-detail') }}" class="btn custom-btn mt-3 mt-lg-4">Learn More</a>
+                                <a href="{{ url('/detail-kursus') }}" class="btn custom-btn mt-3 mt-lg-4">Learn More</a>
                             </div>
 
                             <span class="badge bg-design rounded-pill ms-auto">14</span>
@@ -63,7 +63,7 @@
 
                                 <p class="mb-0">Visit TemplateMo website to download free CSS templates. Lorem ipsum dolor, sit amet consectetur adipisicing elit animi necessitatibus</p>
 
-                                <a href="{{ url('/topics-detail') }}" class="btn custom-btn mt-3 mt-lg-4">Learn More</a>
+                                <a href="{{ url('/detail-kursus') }}" class="btn custom-btn mt-3 mt-lg-4">Learn More</a>
                             </div>
 
                             <span class="badge bg-advertising rounded-pill ms-auto">30</span>
@@ -81,7 +81,7 @@
 
                                 <p class="mb-0">Lorem ipsum dolor, sit amet consectetur adipisicing elit animi necessitatibus</p>
 
-                                <a href="{{ url('/topics-detail') }}" class="btn custom-btn mt-3 mt-lg-4">Learn More</a>
+                                <a href="{{ url('/detail-kursus') }}" class="btn custom-btn mt-3 mt-lg-4">Learn More</a>
                             </div>
 
                             <span class="badge bg-music rounded-pill ms-auto">20</span>
@@ -138,12 +138,12 @@
         <div class="row">
 
             <div class="col-lg-12 col-12">
-                <h3 class="mb-4">Trending Topics</h3>
+                <h3 class="mb-4">Trending Kursus</h3>
             </div>
 
             <div class="col-lg-6 col-md-6 col-12 mt-3 mb-4 mb-lg-0">
                 <div class="custom-block bg-white shadow-lg">
-                    <a href="{{ url('/topics-detail') }}">
+                    <a href="{{ url('/detail-kursus') }}">
                         <div class="d-flex">
                             <div>
                                 <h5 class="mb-2">Investment</h5>
@@ -170,7 +170,7 @@
 
                                 <p class="text-white">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sint animi necessitatibus aperiam repudiandae nam omnis</p>
 
-                                <a href="{{ route('topics-detail') }}" class="btn custom-btn mt-2 mt-lg-3">Learn More</a>
+                                <a href="{{ route('detail-kursus') }}" class="btn custom-btn mt-2 mt-lg-3">Learn More</a>
                             </div>
 
                             <span class="badge bg-finance rounded-pill ms-auto">25</span>

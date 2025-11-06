@@ -11,7 +11,7 @@ class detailController extends Controller
      */
     public function detail()
     {
-        return view('landing.topics-detail');
+        return view('landing.detail-kursus');
     }
 
     /**

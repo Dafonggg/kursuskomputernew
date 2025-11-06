@@ -17,11 +17,6 @@ class LandingController extends Controller
     /**
      * Display the topics detail page.
      */
-    public function topicsDetail()
-    {
-        return view('landing.topics-detail');
-    }
-
     /**
      * Display the main page with all content combined.
      */

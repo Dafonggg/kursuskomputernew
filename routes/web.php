@@ -33,17 +33,14 @@ use App\Http\Controllers\sistem\SnotificationController;
 
 // Landing Page Routes
 Route::get('/', [LandingController::class, 'index'])->name('home');
-Route::get('/topics-detail', [detailController::class, 'detail'])->name('topics-detail');
-Route::get('/topics-listing', [listingController::class, 'listing'])->name('topics-listing');
+Route::get('/detail-kursus', [detailController::class, 'detail'])->name('detail-kursus');
+Route::get('/daftar-kursus', [listingController::class, 'listing'])->name('daftar-kursus');
 Route::get('/contact', [contactController::class, 'contact'])->name('contact');
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/register', [RegisterController::class, 'register'])->name('register');
 
 // Auth Routes
-Route::post('/logout', function () {
-    // Logout logic akan ditambahkan saat auth system siap
-    return redirect()->route('login');
-})->name('logout');
+
 
 // Dashboard Routes
 Route::prefix('dashboard')->name('dashboard.')->group(function () {
