@@ -42,7 +42,7 @@
             <th>Pengajar</th>
             <th>Tanggal</th>
             <th>Waktu</th>
-            <th>Ruangan</th>
+            <th>Tipe Kursus</th>
             <th>Peserta</th>
             <th>Status</th>
             <th>Aksi</th>
@@ -295,14 +295,11 @@
               <input type="time" class="form-control" id="waktuSelesai" required />
             </div>
             <div class="col-md-6 mb-3">
-              <label for="ruangan" class="form-label">Ruangan <span class="text-danger">*</span></label>
-              <select class="form-select" id="ruangan" required>
-                <option value="">Pilih Ruangan</option>
-                <option value="lab-a1">Lab A1</option>
-                <option value="lab-a2">Lab A2</option>
-                <option value="lab-b1">Lab B1</option>
-                <option value="lab-b2">Lab B2</option>
-                <option value="lab-c1">Lab C1</option>
+              <label for="tipeKursus" class="form-label">Tipe Kursus <span class="text-danger">*</span></label>
+              <select class="form-select" id="tipeKursus" required>
+                <option value="">Pilih Tipe Kursus</option>
+                <option value="offline">Offline</option>
+                <option value="online">Online</option>
               </select>
             </div>
             <div class="col-md-6 mb-3">
@@ -378,13 +375,10 @@
               <input type="time" class="form-control" id="editWaktuSelesai" value="11:00" required />
             </div>
             <div class="col-md-6 mb-3">
-              <label for="editRuangan" class="form-label">Ruangan <span class="text-danger">*</span></label>
-              <select class="form-select" id="editRuangan" required>
-                <option value="lab-a1" selected>Lab A1</option>
-                <option value="lab-a2">Lab A2</option>
-                <option value="lab-b1">Lab B1</option>
-                <option value="lab-b2">Lab B2</option>
-                <option value="lab-c1">Lab C1</option>
+              <label for="editTipeKursus" class="form-label">Tipe Kursus <span class="text-danger">*</span></label>
+              <select class="form-select" id="editTipeKursus" required>
+                <option value="offline" selected>Offline</option>
+                <option value="online">Online</option>
               </select>
             </div>
             <div class="col-md-6 mb-3">

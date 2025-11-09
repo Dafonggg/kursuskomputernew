@@ -17,282 +17,90 @@
                 </button>
               </div>
 
+              @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  {{ session('success') }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              @endif
+
+              @if(session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  {{ session('error') }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              @endif
+
 <!-- Kursus Cards -->
 <div class="row g-4 mb-4">
-  <div class="col-md-6 col-lg-4">
-    <div class="card h-100">
-      <img
-        class="card-img-top"
-        src="{{ asset('assets/img/elements/2.png') }}"
-        alt="Web Development"
-        style="height: 200px; object-fit: cover;" />
-      <div class="card-body">
-        <div class="d-flex justify-content-between align-items-start mb-2">
-          <h5 class="card-title mb-0">Web Development</h5>
-          <span class="badge bg-label-success">Aktif</span>
-        </div>
-        <p class="card-text text-body-secondary">
-          Pelajari HTML, CSS, JavaScript dari dasar hingga tingkat lanjutan. Bangun website modern dan responsive.
-        </p>
-        <div class="mb-3">
-          <div class="d-flex align-items-center mb-1">
-            <i class="icon-base ri ri-time-line me-2"></i>
-            <small class="text-body-secondary">Durasi: 3 bulan</small>
+  @forelse($kursus as $item)
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100">
+        @if($item->gambar && $item->gambar !== 'default.jpg')
+          <img
+            class="card-img-top"
+            src="{{ asset($item->gambar) }}"
+            alt="{{ $item->nama_kursus }}"
+            style="height: 200px; object-fit: cover;" />
+        @endif
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-start mb-2">
+            <h5 class="card-title mb-0">{{ $item->nama_kursus }}</h5>
+            <span class="badge {{ $item->status === 'aktif' ? 'bg-label-success' : 'bg-label-warning' }}">
+              {{ ucfirst($item->status) }}
+            </span>
           </div>
-          <div class="d-flex align-items-center mb-1">
-            <i class="icon-base ri ri-user-line me-2"></i>
-            <small class="text-body-secondary">Peserta: 45</small>
+          <p class="card-text text-body-secondary">
+            {{ Str::limit($item->deskripsi, 100) }}
+          </p>
+          <div class="mb-3">
+            <div class="d-flex align-items-center mb-1">
+              <i class="icon-base ri ri-time-line me-2"></i>
+              <small class="text-body-secondary">Durasi: {{ $item->durasi }}</small>
+            </div>
+            <div class="d-flex align-items-center">
+              <i class="icon-base ri ri-money-dollar-circle-line me-2"></i>
+              <small class="text-body-secondary fw-bold">Rp {{ number_format($item->harga, 0, ',', '.') }}</small>
+            </div>
           </div>
-          <div class="d-flex align-items-center">
-            <i class="icon-base ri ri-money-dollar-circle-line me-2"></i>
-            <small class="text-body-secondary fw-bold">Rp 2.500.000</small>
+          <div class="d-flex gap-2">
+            <button class="btn btn-label-primary btn-sm flex-fill" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#modalEditKursus"
+                    onclick="editKursus({{ $item->id_kursus }}, '{{ $item->nama_kursus }}', '{{ addslashes($item->deskripsi) }}', {{ $item->harga }}, '{{ $item->durasi }}', '{{ $item->status }}', '{{ $item->gambar }}')">
+              <i class="icon-base ri ri-pencil-line me-1"></i>
+              Edit
+            </button>
+            <form action="{{ route('dashboard.kursus.destroy', $item->id_kursus) }}" method="POST" class="d-inline" id="deleteForm{{ $item->id_kursus }}">
+              @csrf
+              @method('DELETE')
+              <button type="button" class="btn btn-label-danger btn-sm" onclick="confirmDelete({{ $item->id_kursus }}, '{{ $item->nama_kursus }}')">
+                <i class="icon-base ri ri-delete-bin-line"></i>
+              </button>
+            </form>
           </div>
-        </div>
-        <div class="d-flex gap-2">
-          <button class="btn btn-label-primary btn-sm flex-fill" data-bs-toggle="modal" data-bs-target="#modalEditKursus">
-            <i class="icon-base ri ri-pencil-line me-1"></i>
-            Edit
-          </button>
-          <button class="btn btn-label-danger btn-sm" onclick="confirmDelete()">
-            <i class="icon-base ri ri-delete-bin-line"></i>
-          </button>
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="col-md-6 col-lg-4">
-    <div class="card h-100">
-      <img
-        class="card-img-top"
-        src="{{ asset('assets/img/elements/5.png') }}"
-        alt="Python Programming"
-        style="height: 200px; object-fit: cover;" />
-      <div class="card-body">
-        <div class="d-flex justify-content-between align-items-start mb-2">
-          <h5 class="card-title mb-0">Python Programming</h5>
-          <span class="badge bg-label-success">Aktif</span>
-        </div>
-        <p class="card-text text-body-secondary">
-          Kuasai Python dari dasar hingga advanced. Belajar membuat aplikasi web, data science, dan automation.
-        </p>
-        <div class="mb-3">
-          <div class="d-flex align-items-center mb-1">
-            <i class="icon-base ri ri-time-line me-2"></i>
-            <small class="text-body-secondary">Durasi: 4 bulan</small>
-          </div>
-          <div class="d-flex align-items-center mb-1">
-            <i class="icon-base ri ri-user-line me-2"></i>
-            <small class="text-body-secondary">Peserta: 38</small>
-          </div>
-          <div class="d-flex align-items-center">
-            <i class="icon-base ri ri-money-dollar-circle-line me-2"></i>
-            <small class="text-body-secondary fw-bold">Rp 3.000.000</small>
-          </div>
-        </div>
-        <div class="d-flex gap-2">
-          <button class="btn btn-label-primary btn-sm flex-fill" data-bs-toggle="modal" data-bs-target="#modalEditKursus">
-            <i class="icon-base ri ri-pencil-line me-1"></i>
-            Edit
-          </button>
-          <button class="btn btn-label-danger btn-sm" onclick="confirmDelete()">
-            <i class="icon-base ri ri-delete-bin-line"></i>
-          </button>
-        </div>
+  @empty
+    <div class="col-12">
+      <div class="alert alert-info text-center">
+        <i class="icon-base ri ri-information-line me-2"></i>
+        Belum ada kursus yang ditambahkan. Silakan tambah kursus baru.
       </div>
     </div>
-  </div>
-
-  <div class="col-md-6 col-lg-4">
-    <div class="card h-100">
-      <img
-        class="card-img-top"
-        src="{{ asset('assets/img/elements/4.png') }}"
-        alt="Database Management"
-        style="height: 200px; object-fit: cover;" />
-      <div class="card-body">
-        <div class="d-flex justify-content-between align-items-start mb-2">
-          <h5 class="card-title mb-0">Database Management</h5>
-          <span class="badge bg-label-success">Aktif</span>
-        </div>
-        <p class="card-text text-body-secondary">
-          Pelajari MySQL, MongoDB, dan database management system lainnya. Optimasi query dan database design.
-        </p>
-        <div class="mb-3">
-          <div class="d-flex align-items-center mb-1">
-            <i class="icon-base ri ri-time-line me-2"></i>
-            <small class="text-body-secondary">Durasi: 2.5 bulan</small>
-          </div>
-          <div class="d-flex align-items-center mb-1">
-            <i class="icon-base ri ri-user-line me-2"></i>
-            <small class="text-body-secondary">Peserta: 28</small>
-          </div>
-          <div class="d-flex align-items-center">
-            <i class="icon-base ri ri-money-dollar-circle-line me-2"></i>
-            <small class="text-body-secondary fw-bold">Rp 2.200.000</small>
-          </div>
-        </div>
-        <div class="d-flex gap-2">
-          <button class="btn btn-label-primary btn-sm flex-fill" data-bs-toggle="modal" data-bs-target="#modalEditKursus">
-            <i class="icon-base ri ri-pencil-line me-1"></i>
-            Edit
-          </button>
-          <button class="btn btn-label-danger btn-sm" onclick="confirmDelete()">
-            <i class="icon-base ri ri-delete-bin-line"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-6 col-lg-4">
-    <div class="card h-100">
-      <img
-        class="card-img-top"
-        src="{{ asset('assets/img/elements/7.png') }}"
-        alt="UI/UX Design"
-        style="height: 200px; object-fit: cover;" />
-      <div class="card-body">
-        <div class="d-flex justify-content-between align-items-start mb-2">
-          <h5 class="card-title mb-0">UI/UX Design</h5>
-          <span class="badge bg-label-success">Aktif</span>
-        </div>
-        <p class="card-text text-body-secondary">
-          Desain interface yang menarik dan user-friendly menggunakan Figma, Adobe XD, dan tools modern lainnya.
-        </p>
-        <div class="mb-3">
-          <div class="d-flex align-items-center mb-1">
-            <i class="icon-base ri ri-time-line me-2"></i>
-            <small class="text-body-secondary">Durasi: 3 bulan</small>
-          </div>
-          <div class="d-flex align-items-center mb-1">
-            <i class="icon-base ri ri-user-line me-2"></i>
-            <small class="text-body-secondary">Peserta: 32</small>
-          </div>
-          <div class="d-flex align-items-center">
-            <i class="icon-base ri ri-money-dollar-circle-line me-2"></i>
-            <small class="text-body-secondary fw-bold">Rp 2.800.000</small>
-          </div>
-        </div>
-        <div class="d-flex gap-2">
-          <button class="btn btn-label-primary btn-sm flex-fill" data-bs-toggle="modal" data-bs-target="#modalEditKursus">
-            <i class="icon-base ri ri-pencil-line me-1"></i>
-            Edit
-          </button>
-          <button class="btn btn-label-danger btn-sm" onclick="confirmDelete()">
-            <i class="icon-base ri ri-delete-bin-line"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-6 col-lg-4">
-    <div class="card h-100">
-      <img
-        class="card-img-top"
-        src="{{ asset('assets/img/elements/1.png') }}"
-        alt="Mobile App Development"
-        style="height: 200px; object-fit: cover;" />
-      <div class="card-body">
-        <div class="d-flex justify-content-between align-items-start mb-2">
-          <h5 class="card-title mb-0">Mobile App Development</h5>
-          <span class="badge bg-label-success">Aktif</span>
-        </div>
-        <p class="card-text text-body-secondary">
-          Kembangkan aplikasi mobile untuk iOS dan Android menggunakan React Native dan Flutter.
-        </p>
-        <div class="mb-3">
-          <div class="d-flex align-items-center mb-1">
-            <i class="icon-base ri ri-time-line me-2"></i>
-            <small class="text-body-secondary">Durasi: 4 bulan</small>
-          </div>
-          <div class="d-flex align-items-center mb-1">
-            <i class="icon-base ri ri-user-line me-2"></i>
-            <small class="text-body-secondary">Peserta: 24</small>
-          </div>
-          <div class="d-flex align-items-center">
-            <i class="icon-base ri ri-money-dollar-circle-line me-2"></i>
-            <small class="text-body-secondary fw-bold">Rp 3.500.000</small>
-          </div>
-        </div>
-        <div class="d-flex gap-2">
-          <button class="btn btn-label-primary btn-sm flex-fill" data-bs-toggle="modal" data-bs-target="#modalEditKursus">
-            <i class="icon-base ri ri-pencil-line me-1"></i>
-            Edit
-          </button>
-          <button class="btn btn-label-danger btn-sm" onclick="confirmDelete()">
-            <i class="icon-base ri ri-delete-bin-line"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-6 col-lg-4">
-    <div class="card h-100">
-      <img
-        class="card-img-top"
-        src="{{ asset('assets/img/elements/18.png') }}"
-        alt="Data Science"
-        style="height: 200px; object-fit: cover;" />
-      <div class="card-body">
-        <div class="d-flex justify-content-between align-items-start mb-2">
-          <h5 class="card-title mb-0">Data Science</h5>
-          <span class="badge bg-label-warning">Nonaktif</span>
-        </div>
-        <p class="card-text text-body-secondary">
-          Analisis data dengan Python, machine learning, dan visualisasi data menggunakan berbagai tools.
-        </p>
-        <div class="mb-3">
-          <div class="d-flex align-items-center mb-1">
-            <i class="icon-base ri ri-time-line me-2"></i>
-            <small class="text-body-secondary">Durasi: 5 bulan</small>
-          </div>
-          <div class="d-flex align-items-center mb-1">
-            <i class="icon-base ri ri-user-line me-2"></i>
-            <small class="text-body-secondary">Peserta: 0</small>
-          </div>
-          <div class="d-flex align-items-center">
-            <i class="icon-base ri ri-money-dollar-circle-line me-2"></i>
-            <small class="text-body-secondary fw-bold">Rp 4.000.000</small>
-          </div>
-        </div>
-        <div class="d-flex gap-2">
-          <button class="btn btn-label-primary btn-sm flex-fill" data-bs-toggle="modal" data-bs-target="#modalEditKursus">
-            <i class="icon-base ri ri-pencil-line me-1"></i>
-            Edit
-          </button>
-          <button class="btn btn-label-danger btn-sm" onclick="confirmDelete()">
-            <i class="icon-base ri ri-delete-bin-line"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+  @endforelse
 </div>
               <!--/ Kursus Cards -->
 
               <!-- Pagination -->
-              <nav aria-label="Page navigation">
-                <ul class="pagination justify-content-center">
-                  <li class="page-item prev">
-                    <a class="page-link" href="javascript:void(0);"><i class="icon-base ri ri-arrow-left-s-line"></i></a>
-                  </li>
-                  <li class="page-item active">
-                    <a class="page-link" href="javascript:void(0);">1</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="javascript:void(0);">2</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="javascript:void(0);">3</a>
-                  </li>
-                  <li class="page-item next">
-                    <a class="page-link" href="javascript:void(0);"><i class="icon-base ri ri-arrow-right-s-line"></i></a>
-                  </li>
-                </ul>
-              </nav>
+              @if($kursus->hasPages())
+                <nav aria-label="Page navigation">
+                  <ul class="pagination justify-content-center">
+                    {{ $kursus->links() }}
+                  </ul>
+                </nav>
+              @endif
               <!--/ Pagination -->
 
     <!-- Modal Tambah Kursus -->
@@ -308,38 +116,57 @@
               aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form id="formTambahKursus">
+            <form id="formTambahKursus" action="{{ route('dashboard.kursus.store') }}" method="POST" enctype="multipart/form-data">
+              @csrf
               <div class="row">
                 <div class="col-12 mb-3">
                   <label for="namaKursus" class="form-label">Nama Kursus <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" id="namaKursus" placeholder="Contoh: Web Development" required />
+                  <input type="text" class="form-control" id="namaKursus" name="nama_kursus" placeholder="Masukkan nama kursus" required />
+                  @error('nama_kursus')
+                    <div class="text-danger small">{{ $message }}</div>
+                  @enderror
                 </div>
                 <div class="col-12 mb-3">
                   <label for="deskripsiKursus" class="form-label">Deskripsi <span class="text-danger">*</span></label>
-                  <textarea class="form-control" id="deskripsiKursus" rows="4" placeholder="Jelaskan tentang kursus ini..." required></textarea>
+                  <textarea class="form-control" id="deskripsiKursus" name="deskripsi" rows="4" placeholder="Masukkan deskripsi kursus" required></textarea>
+                  @error('deskripsi')
+                    <div class="text-danger small">{{ $message }}</div>
+                  @enderror
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="hargaKursus" class="form-label">Harga <span class="text-danger">*</span></label>
                   <div class="input-group">
                     <span class="input-group-text">Rp</span>
-                    <input type="number" class="form-control" id="hargaKursus" placeholder="2500000" required />
+                    <input type="number" class="form-control" id="hargaKursus" name="harga" placeholder="2500000" required />
                   </div>
+                  @error('harga')
+                    <div class="text-danger small">{{ $message }}</div>
+                  @enderror
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label for="durasiKursus" class="form-label">Durasi</label>
-                  <input type="text" class="form-control" id="durasiKursus" placeholder="Contoh: 3 bulan" />
+                  <label for="durasiKursus" class="form-label">Durasi <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="durasiKursus" name="durasi" placeholder="Contoh: 3 bulan" required />
+                  @error('durasi')
+                    <div class="text-danger small">{{ $message }}</div>
+                  @enderror
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label for="gambarKursus" class="form-label">Gambar</label>
-                  <input type="file" class="form-control" id="gambarKursus" accept="image/*" />
+                  <label for="gambarKursus" class="form-label">Gambar <span class="text-danger">*</span></label>
+                  <input type="file" class="form-control" id="gambarKursus" name="gambar" accept="image/*" required />
                   <small class="text-body-secondary">Format: JPG, PNG, Max 2MB</small>
+                  @error('gambar')
+                    <div class="text-danger small">{{ $message }}</div>
+                  @enderror
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="statusKursus" class="form-label">Status</label>
-                  <select class="form-select" id="statusKursus">
+                  <select class="form-select" id="statusKursus" name="status">
                     <option value="aktif" selected>Aktif</option>
                     <option value="nonaktif">Nonaktif</option>
                   </select>
+                  @error('status')
+                    <div class="text-danger small">{{ $message }}</div>
+                  @enderror
                 </div>
               </div>
             </form>
@@ -348,7 +175,7 @@
             <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
               Batal
             </button>
-            <button type="button" class="btn btn-primary" onclick="simpanKursus()">
+            <button type="submit" form="formTambahKursus" class="btn btn-primary">
               Simpan
             </button>
           </div>
@@ -370,38 +197,60 @@
               aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form id="formEditKursus">
+            <form id="formEditKursus" method="POST" enctype="multipart/form-data">
+              @csrf
+              @method('PUT')
+              <input type="hidden" id="editIdKursus" name="id_kursus">
               <div class="row">
                 <div class="col-12 mb-3">
                   <label for="editNamaKursus" class="form-label">Nama Kursus <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" id="editNamaKursus" value="Web Development" required />
+                  <input type="text" class="form-control" id="editNamaKursus" name="nama_kursus" required />
+                  @error('nama_kursus')
+                    <div class="text-danger small">{{ $message }}</div>
+                  @enderror
                 </div>
                 <div class="col-12 mb-3">
                   <label for="editDeskripsiKursus" class="form-label">Deskripsi <span class="text-danger">*</span></label>
-                  <textarea class="form-control" id="editDeskripsiKursus" rows="4" required>Pelajari HTML, CSS, JavaScript dari dasar hingga tingkat lanjutan. Bangun website modern dan responsive.</textarea>
+                  <textarea class="form-control" id="editDeskripsiKursus" name="deskripsi" rows="4" required></textarea>
+                  @error('deskripsi')
+                    <div class="text-danger small">{{ $message }}</div>
+                  @enderror
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="editHargaKursus" class="form-label">Harga <span class="text-danger">*</span></label>
                   <div class="input-group">
                     <span class="input-group-text">Rp</span>
-                    <input type="number" class="form-control" id="editHargaKursus" value="2500000" required />
+                    <input type="number" class="form-control" id="editHargaKursus" name="harga" required />
                   </div>
+                  @error('harga')
+                    <div class="text-danger small">{{ $message }}</div>
+                  @enderror
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label for="editDurasiKursus" class="form-label">Durasi</label>
-                  <input type="text" class="form-control" id="editDurasiKursus" value="3 bulan" />
+                  <label for="editDurasiKursus" class="form-label">Durasi <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="editDurasiKursus" name="durasi" required />
+                  @error('durasi')
+                    <div class="text-danger small">{{ $message }}</div>
+                  @enderror
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="editGambarKursus" class="form-label">Gambar</label>
-                  <input type="file" class="form-control" id="editGambarKursus" accept="image/*" />
-                  <small class="text-body-secondary">Format: JPG, PNG, Max 2MB</small>
+                  <input type="file" class="form-control" id="editGambarKursus" name="gambar" accept="image/*" />
+                  <small class="text-body-secondary">Format: JPG, PNG, Max 2MB. Kosongkan jika tidak ingin mengubah gambar.</small>
+                  <div id="currentImage" class="mt-2"></div>
+                  @error('gambar')
+                    <div class="text-danger small">{{ $message }}</div>
+                  @enderror
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="editStatusKursus" class="form-label">Status</label>
-                  <select class="form-select" id="editStatusKursus">
-                    <option value="aktif" selected>Aktif</option>
+                  <select class="form-select" id="editStatusKursus" name="status">
+                    <option value="aktif">Aktif</option>
                     <option value="nonaktif">Nonaktif</option>
                   </select>
+                  @error('status')
+                    <div class="text-danger small">{{ $message }}</div>
+                  @enderror
                 </div>
               </div>
             </form>
@@ -410,7 +259,7 @@
             <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
               Batal
             </button>
-            <button type="button" class="btn btn-primary" onclick="updateKursus()">
+            <button type="submit" form="formEditKursus" class="btn btn-primary">
               Update
             </button>
           </div>
@@ -422,21 +271,40 @@
 
 @push('scripts')
     <script>
-      function simpanKursus() {
-        alert('Kursus berhasil ditambahkan!');
-        const modal = bootstrap.Modal.getInstance(document.getElementById('modalTambahKursus'));
-        modal.hide();
+      // Reset form when modal is closed
+      document.getElementById('modalTambahKursus').addEventListener('hidden.bs.modal', function () {
+        document.getElementById('formTambahKursus').reset();
+      });
+
+      // Function to populate edit form
+      function editKursus(id, nama, deskripsi, harga, durasi, status, gambar) {
+        document.getElementById('editIdKursus').value = id;
+        document.getElementById('editNamaKursus').value = nama;
+        document.getElementById('editDeskripsiKursus').value = deskripsi;
+        document.getElementById('editHargaKursus').value = harga;
+        document.getElementById('editDurasiKursus').value = durasi;
+        document.getElementById('editStatusKursus').value = status;
+        
+        // Set form action
+        document.getElementById('formEditKursus').action = '{{ route("dashboard.kursus.update", ":id") }}'.replace(':id', id);
+        
+        // Show current image if exists
+        const currentImageDiv = document.getElementById('currentImage');
+        if (gambar && gambar !== 'default.jpg') {
+          const imagePath = gambar.startsWith('images/') ? gambar : 'images/' + gambar;
+          currentImageDiv.innerHTML = `
+            <small class="text-body-secondary">Gambar saat ini:</small><br>
+            <img src="{{ url('/') }}/${imagePath}" alt="Current Image" style="max-width: 200px; max-height: 150px; object-fit: cover; border-radius: 4px; margin-top: 5px;">
+          `;
+        } else {
+          currentImageDiv.innerHTML = '';
+        }
       }
 
-      function updateKursus() {
-        alert('Kursus berhasil diupdate!');
-        const modal = bootstrap.Modal.getInstance(document.getElementById('modalEditKursus'));
-        modal.hide();
-      }
-
-      function confirmDelete() {
-        if (confirm('Apakah Anda yakin ingin menghapus kursus ini?')) {
-          alert('Kursus berhasil dihapus!');
+      // Function to confirm delete
+      function confirmDelete(id, nama) {
+        if (confirm(`Apakah Anda yakin ingin menghapus kursus "${nama}"?`)) {
+          document.getElementById('deleteForm' + id).submit();
         }
       }
     </script>

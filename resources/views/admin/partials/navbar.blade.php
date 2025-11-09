@@ -53,8 +53,8 @@
                   </div>
                 </div>
                 <div class="flex-grow-1">
-                  <h6 class="mb-0">John Doe</h6>
-                  <small class="text-body-secondary">Admin</small>
+                  <h6 class="mb-0">{{ Auth::user()->name }}</h6>
+                  <small class="text-body-secondary">{{ Auth::user()->role }}</small>
                 </div>
               </div>
             </a>
@@ -79,10 +79,10 @@
           </li>
           <li>
             <div class="d-grid px-4 pt-2 pb-1">
-              <form method="POST" action="{{ route('logout') }}" class="w-100">
+              <form id="logout-form" action="{{ route('logout') }}" method="POST">
                 @csrf
-                <button type="submit" class="btn btn-danger d-flex w-100">
-                  <small class="align-middle">Logout</small>
+                <button type="submit" class="btn btn-danger d-flex w-100" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                  <small class="align-middle"></small>{{ Auth::user()->name }}</small>
                   <i class="ri ri-logout-box-r-line ms-2 ri-xs"></i>
                 </button>
               </form>

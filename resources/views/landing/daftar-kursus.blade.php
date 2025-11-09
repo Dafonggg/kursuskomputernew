@@ -31,7 +31,7 @@
         <div class="row">
 
             <div class="col-lg-12 col-12 text-center">
-                <h3 class="mb-4">Popular Kursus</h3>
+                <h3 class="mb-4">Daftar Kursus</h3>
             </div>
 
             <div class="col-lg-8 col-12 mt-3 mx-auto">
@@ -45,7 +45,7 @@
 
                                 <p class="mb-0">Daftar Kursus includes home, listing, detail and contact pages. Feel free to modify this template for your custom websites.</p>
 
-                                <a href="{{ url('/detail-kursus') }}" class="btn custom-btn mt-3 mt-lg-4">Learn More</a>
+                                <a href="{{ url('/detail-kursus') }}" class="btn custom-btn mt-3 mt-lg-4">Daftar</a>
                             </div>
 
                             <span class="badge bg-design rounded-pill ms-auto">14</span>
@@ -63,7 +63,7 @@
 
                                 <p class="mb-0">Visit TemplateMo website to download free CSS templates. Lorem ipsum dolor, sit amet consectetur adipisicing elit animi necessitatibus</p>
 
-                                <a href="{{ url('/detail-kursus') }}" class="btn custom-btn mt-3 mt-lg-4">Learn More</a>
+                                <a href="{{ url('/detail-kursus') }}" class="btn custom-btn mt-3 mt-lg-4">Daftar</a>
                             </div>
 
                             <span class="badge bg-advertising rounded-pill ms-auto">30</span>
@@ -81,7 +81,7 @@
 
                                 <p class="mb-0">Lorem ipsum dolor, sit amet consectetur adipisicing elit animi necessitatibus</p>
 
-                                <a href="{{ url('/detail-kursus') }}" class="btn custom-btn mt-3 mt-lg-4">Learn More</a>
+                                <a href="{{ url('/detail-kursus') }}" class="btn custom-btn mt-3 mt-lg-4">Daftar</a>
                             </div>
 
                             <span class="badge bg-music rounded-pill ms-auto">20</span>
@@ -170,7 +170,7 @@
 
                                 <p class="text-white">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sint animi necessitatibus aperiam repudiandae nam omnis</p>
 
-                                <a href="{{ route('detail-kursus') }}" class="btn custom-btn mt-2 mt-lg-3">Learn More</a>
+                                <a href="{{ route('detail-kursus') }}" class="btn custom-btn mt-2 mt-lg-3">Daftar</a>
                             </div>
 
                             <span class="badge bg-finance rounded-pill ms-auto">25</span>

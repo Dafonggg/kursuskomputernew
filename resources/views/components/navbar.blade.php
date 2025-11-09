@@ -1,43 +1,27 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">
+        <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
             <img src="{{ asset('images/logokrk.png') }}" alt="Ryan Computer" style="height: 40px; margin-right: 10px;">
-            <span>Kursus Ryan</span>
+            <span class="d-none d-lg-inline">Kursus Ryan</span>
         </a>
 
-        <div class="d-lg-none ms-auto me-4">
-            <div class="dropdown position-relative">
-                <a href="#" class="navbar-icon bi-person" id="mobileUserDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
-                <ul class="dropdown-menu dropdown-menu-end user-dropdown-menu" style="right: 0; left: auto; margin-top: 0.5rem;" aria-labelledby="mobileUserDropdown">
-                    <li>
-                        <a class="dropdown-item user-dropdown-item {{ request()->routeIs('login') ? 'active' : '' }}" href="{{ route('login') }}">
-                            <i class="bi bi-box-arrow-in-right me-2"></i>
-                            <span>Login</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item user-dropdown-item {{ request()->routeIs('register') ? 'active' : '' }}" href="{{ route('register') }}">
-                            <i class="bi bi-person-plus me-2"></i>
-                            <span>Register</span>
-                        </a>
-                    </li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li>
-                        <a class="dropdown-item user-dropdown-item {{ request()->routeIs('dashboard.*') ? 'active' : '' }}" href="{{ route('dashboard.admin-dashboard') }}">
-                            <i class="bi bi-speedometer2 me-2"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+        <!-- Cart Button, Bookmark Button and Hamburger Menu for Mobile -->
+        <div class="d-lg-none d-flex align-items-center gap-2">
+            <a href="{{ url('/cart') }}" 
+               class="bg-[#81d0c7] hover:bg-[#4f98a4] text-white font-semibold px-3 py-2 rounded-full transition-all duration-300 transform hover:scale-105 no-underline d-flex align-items-center justify-content-center">
+                <span class="material-symbols-outlined" style="font-size: 30px;">shopping_cart</span>
+            </a>
+            <a href="#" 
+               class="bg-[#81d0c7] hover:bg-[#4f98a4] text-white font-semibold px-3 py-2 rounded-full transition-all duration-300 transform hover:scale-105 no-underline d-flex align-items-center justify-content-center">
+                <span class="custom-icon bi-bookmark text-white" style="font-size: 24px; color: white !important;"></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
         </div>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-lg-5 me-lg-auto">
+            <ul class="navbar-nav ms-lg-5 me-lg-auto align-items-center">
                 <li class="nav-item">
                     <a class="nav-link click-scroll {{ request()->routeIs('index') ? 'active' : '' }}" href="{{ url('/') }}#section_1">Home</a>
                 </li>
@@ -69,18 +53,112 @@
                 </li>
             </ul>
 
-            <!-- Login & Sign Up Buttons -->
-            <div class="d-none d-lg-flex gap-3 align-items-center ms-lg-4">
-                <a href="{{ route('login') }}" 
-                   class="bg-[#81d0c7] hover:bg-[#4f98a4] text-white font-semibold px-6 py-2.5 rounded-full transition-all duration-300 transform hover:scale-105 no-underline">
-                    Login
-                </a>
-                <span class="text-white">|</span>
-                <a href="{{ route('register') }}" 
-                   class="bg-[#13547a] hover:bg-[#4f98a4] text-white font-semibold px-6 py-2.5 rounded-full transition-all duration-300 transform hover:scale-105 no-underline">
-                    Sign Up
-                </a>
+            <!-- Auth Buttons for Mobile (Hamburger Menu) -->
+            <div class="d-lg-none mt-3 mb-3">
+                @auth
+                    <!-- User Dropdown -->
+                    <div class="user-dropdown mb-2">
+                        <button class="user-dropdown-btn bg-[#81d0c7] hover:bg-[#4f98a4] text-white font-semibold px-6 py-2.5 rounded-full transition-all duration-300 transform hover:scale-105 w-100">
+                            <span class="material-symbols-outlined"> account_circle </span>
+                            <span>{{ Auth::user()->name }}</span>
+                            <span class="material-symbols-outlined chevron"> expand_more </span>
+                        </button>
+                        <div class="user-dropdown-menu">
+                            <div class="user-dropdown-menu-inner">
+                                <div class="user-dropdown-main-menu">
+                                    <a href="{{ route('dashboard.admin-dashboard') }}" class="user-dropdown-item">
+                                        <span class="material-symbols-outlined"> dashboard </span>
+                                        <span>Dashboard</span>
+                                    </a>
+                                    <form action="{{ route('logout') }}" method="POST" class="user-dropdown-form">
+                                        @csrf
+                                        <button type="submit" class="user-dropdown-item">
+                                            <span class="material-symbols-outlined"> logout </span>
+                                            <span>Logout</span>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    <!-- Cart Button -->
+                    <!-- Login & Sign Up Buttons -->
+                    <div class="d-flex flex-column gap-2">
+                        <a href="{{ route('login') }}" 
+                           class="bg-[#81d0c7] hover:bg-[#4f98a4] text-white font-semibold px-6 py-2.5 rounded-full transition-all duration-300 transform hover:scale-105 no-underline text-center">
+                            Login
+                        </a>
+                        <a href="{{ route('register') }}" 
+                           class="bg-[#81d0c7] hover:bg-[#4f98a4] text-white font-semibold px-6 py-2.5 rounded-full transition-all duration-300 transform hover:scale-105 no-underline text-center">
+                            Sign Up
+                        </a>
+                    </div>
+                @endauth
             </div>
+
+            <!-- Auth Buttons / User Dropdown -->
+            <div class="d-none d-lg-flex gap-2 align-items-center ms-lg-4">
+                @auth
+                    <!-- Cart Button -->
+                    <a href="{{ url('/cart') }}" 
+                       class="bg-[#81d0c7] hover:bg-[#4f98a4] text-white font-semibold px-4 py-2.5 rounded-full transition-all duration-300 transform hover:scale-105 no-underline d-flex align-items-center justify-content-center" style="min-width: 44px; height: 44px;">
+                        <span class="material-symbols-outlined" style="font-size: 20px;">shopping_cart</span>
+                    </a>
+                    <!-- Bookmark Button -->
+                    <a href="#" 
+                       class="bg-[#81d0c7] hover:bg-[#4f98a4] text-white font-semibold px-4 py-2.5 rounded-full transition-all duration-300 transform hover:scale-105 no-underline d-flex align-items-center justify-content-center" style="min-width: 44px; height: 44px;">
+                        <span class="custom-icon bi-bookmark text-white" style="font-size: 18px; color: white !important;"></span>
+                    </a>
+                    <span class="text-white mx-1" style="font-size: 18px;">|</span>
+                    <!-- User Dropdown -->
+                    <div class="user-dropdown">
+                        <button class="user-dropdown-btn bg-[#81d0c7] hover:bg-[#4f98a4] text-white font-semibold px-6 py-2.5 rounded-full transition-all duration-300 transform hover:scale-105 d-flex align-items-center gap-2">
+                            <span class="material-symbols-outlined" style="font-size: 20px;"> account_circle </span>
+                            <span>{{ Auth::user()->name }}</span>
+                            <span class="material-symbols-outlined chevron" style="font-size: 20px;"> expand_more </span>
+                        </button>
+                        <div class="user-dropdown-menu">
+                            <div class="user-dropdown-menu-inner">
+                                <div class="user-dropdown-main-menu">
+                                    <a href="{{ route('dashboard.admin-dashboard') }}" class="user-dropdown-item">
+                                        <span class="material-symbols-outlined"> dashboard </span>
+                                        <span>Dashboard</span>
+                                    </a>
+                                    <form action="{{ route('logout') }}" method="POST" class="user-dropdown-form">
+                                        @csrf
+                                        <button type="submit" class="user-dropdown-item">
+                                            <span class="material-symbols-outlined"> logout </span>
+                                            <span>Logout</span>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    <!-- Cart Button -->
+                    <a href="{{ url('/cart') }}" 
+                       class="bg-[#81d0c7] hover:bg-[#4f98a4] text-white font-semibold px-4 py-2.5 rounded-full transition-all duration-300 transform hover:scale-105 no-underline d-flex align-items-center justify-content-center" style="min-width: 44px; height: 44px;">
+                        <span class="material-symbols-outlined" style="font-size: 20px;">shopping_cart</span>
+                    </a>
+                    <!-- Bookmark Button -->
+                    <a href="#" 
+                       class="bg-[#81d0c7] hover:bg-[#4f98a4] text-white font-semibold px-4 py-2.5 rounded-full transition-all duration-300 transform hover:scale-105 no-underline d-flex align-items-center justify-content-center" style="min-width: 44px; height: 44px;">
+                        <span class="custom-icon bi-bookmark text-white" style="font-size: 18px; color: white !important;"></span>
+                    </a>
+                    <span class="text-white mx-1" style="font-size: 18px;">|</span>
+                    <!-- Login & Sign Up Buttons -->
+                    <a href="{{ route('login') }}" 
+                       class="bg-[#81d0c7] hover:bg-[#4f98a4] text-white font-semibold px-6 py-2.5 rounded-full transition-all duration-300 transform hover:scale-105 no-underline d-flex align-items-center" style="height: 44px;">
+                        Login
+                    </a>
+                    <span class="text-white mx-1" style="font-size: 18px;">|</span>
+                    <a href="{{ route('register') }}" 
+                       class="bg-[#81d0c7] hover:bg-[#4f98a4] text-white font-semibold px-6 py-2.5 rounded-full transition-all duration-300 transform hover:scale-105 no-underline d-flex align-items-center" style="height: 44px;">
+                        Sign Up
+                    </a>
+                @endauth
             </div>
         </div>
     </div>

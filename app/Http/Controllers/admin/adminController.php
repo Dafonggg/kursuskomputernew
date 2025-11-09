@@ -9,7 +9,7 @@ class adminController extends Controller
     /**
      * Display the admin index page.
      */
-    public function indexAdmin()
+    public function indexAdmin(Request $request)
     {
         return view('admin.index-admin');
     }

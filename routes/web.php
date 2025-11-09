@@ -5,8 +5,8 @@ use App\Http\Controllers\LandingController;
 use App\Http\Controllers\detailController;
 use App\Http\Controllers\listingController;
 use App\Http\Controllers\contactController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\admin\adminController;
 use App\Http\Controllers\admin\pesertaController;
 use App\Http\Controllers\admin\jadwalController;
@@ -19,6 +19,7 @@ use App\Http\Controllers\admin\chatController;
 use App\Http\Controllers\sistem\SaccountController;
 use App\Http\Controllers\sistem\SconnectionsController;
 use App\Http\Controllers\sistem\SnotificationController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -37,17 +38,31 @@ Route::get('/detail-kursus', [detailController::class, 'detail'])->name('detail-
 Route::get('/daftar-kursus', [listingController::class, 'listing'])->name('daftar-kursus');
 Route::get('/contact', [contactController::class, 'contact'])->name('contact');
 Route::get('/login', [LoginController::class, 'login'])->name('login');
+route::post('/login', [LoginController::class, 'loginPost'])->name('login.post');
+route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/register', [RegisterController::class, 'register'])->name('register');
+route::post('/register', [RegisterController::class, 'registerPost'])->name('register.post');
 
-// Auth Routes
+// Customer Dashboard Routes
+Route::prefix('customer')->name('customer.')->group(function () {
+    Route::group(['middleware' => 'auth','checkrole:user'], function () {
+        route::get('/customer-dashboard', [customerController::class, 'customerDashboard'])->name('customer-dashboard');
+    });
+});
 
 
 // Dashboard Routes
 Route::prefix('dashboard')->name('dashboard.')->group(function () {
+    Route::group(['middleware' => 'auth','checkrole:admin,user'], function () {
+        route::get('/admin-dashboard', [adminController::class, 'indexAdmin'])->name('admin-dashboard');
+    });
     Route::get('/admin-dashboard', [adminController::class, 'indexAdmin'])->name('admin-dashboard');
     Route::get('/peserta-kursus', [pesertaController::class, 'pesertaKursus'])->name('peserta-kursus');
     Route::get('/jadwal-kursus', [jadwalController::class, 'jadwalKursus'])->name('jadwal-kursus');
     Route::get('/kursus', [kursusController::class, 'kursus'])->name('kursus');
+    Route::post('/kursus', [kursusController::class, 'store'])->name('kursus.store');
+    Route::put('/kursus/{id}', [kursusController::class, 'update'])->name('kursus.update');
+    Route::delete('/kursus/{id}', [kursusController::class, 'destroy'])->name('kursus.destroy');
     Route::get('/materi-kursus', [materinController::class, 'materiKursus'])->name('materi-kursus');
     Route::get('/katalog-produk', [katalogController::class, 'katalogProduk'])->name('katalog-produk');
     Route::get('/laporan-keuangan', [laporanController::class, 'laporanKeuangan'])->name('laporan-keuangan');
